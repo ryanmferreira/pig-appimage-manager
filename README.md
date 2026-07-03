@@ -46,8 +46,6 @@ To import an AppImage file into the manager:
 
 ```plaintext
 .
-├── build
-│   └── Debug
 ├── include
 │   ├── fileManagement.hpp
 │   └── main.hpp
@@ -55,12 +53,13 @@ To import an AppImage file into the manager:
 ├── premake5.lua
 ├── README.md
 ├── scripts
-│   └── build-and-run.sh
+│   ├── build.sh
+│   ├── clean.sh
+│   ├── run.sh
+│   └── setup.sh
 └── src
     ├── fileManagement.cpp
     └── main.cpp
-
-6 directories, 8 files
 ```
 
 ### Initial Requirements

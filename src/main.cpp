@@ -7,10 +7,10 @@ int main(int argc, char *argv[])
 
     FileManagement fm;
 
-    if (!std::filesystem::exists(fm.filePath))
+    if (!std::filesystem::exists(fm.folderPath))
     {
         std::cout << "Default folder not detected. Creating a new one: " << std::endl;
-        fm.createFolder(fm.filePath);
+        fm.createFolder(fm.folderPath);
     }
 
     if (argc > 2)

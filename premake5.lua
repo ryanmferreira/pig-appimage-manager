@@ -2,7 +2,7 @@ workspace "pig-appimage-manager"
     configurations {"Debug", "Release"}
     architecture "x86_64"
 
-    project "PIG"
+    project "pig"
     kind "ConsoleApp"
     language "C++"
     cppdialect "C++23"

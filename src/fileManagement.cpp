@@ -15,10 +15,10 @@ void FileManagement::createFolder(std::filesystem::path &filePath)
 
 void FileManagement::copyFile(std::filesystem::path &sourcePath)
 {
-    std::filesystem::path fileFolderName = std::filesystem::path(sourcePath).stem().string();
-    std::filesystem::path fileName = std::filesystem::path(sourcePath).filename().string();
+    std::filesystem::path fileFolderName = sourcePath.stem();
+    std::filesystem::path fileName = sourcePath.filename();
 
-    std::filesystem::path appFolder = defaultFolder / fileFolderName;
+    std::filesystem::path appFolder = saveLocation / fileFolderName;
 
     createFolder(appFolder);
 
