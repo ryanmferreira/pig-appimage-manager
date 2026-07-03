@@ -13,12 +13,12 @@ void FileManagement::createFolder(std::filesystem::path &filePath)
     }
 }
 
-void FileManagement::copyFile(std::string &sourcePath)
+void FileManagement::copyFile(std::filesystem::path &sourcePath)
 {
-    std::string fileName = std::filesystem::path(sourcePath).filename().string();
-    std::string fileFolderName = std::filesystem::path(sourcePath).stem().string();
+    std::filesystem::path fileFolderName = std::filesystem::path(sourcePath).stem().string();
+    std::filesystem::path fileName = std::filesystem::path(sourcePath).filename().string();
 
-    std::filesystem::path appFolder = defaultFolder + fileFolderName;
+    std::filesystem::path appFolder = defaultFolder / fileFolderName;
 
     createFolder(appFolder);
 
@@ -33,8 +33,8 @@ void FileManagement::copyFile(std::string &sourcePath)
             std::cout << "\nFile copied successfully!\nPath: " << destinationPath << std::endl;
         }
     }
-    catch (const std::filesystem::filesystem_error &e)
+    catch (const std::filesystem::filesystem_error &error)
     {
-        std::cerr << "Error: " << e.what() << '\n';
+        std::cerr << "Error: " << error.what() << '\n';
     }
 }

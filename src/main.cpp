@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     {
         if (std::string(argv[1]) == "copy")
         {
-            std::string sourcePath = argv[2];
+            std::filesystem::path sourcePath = argv[2];
             fm.copyFile(sourcePath);
         }
     }
