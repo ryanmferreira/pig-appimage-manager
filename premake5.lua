@@ -6,10 +6,13 @@ workspace "pig-appimage-manager"
     kind "ConsoleApp"
     language "C++"
     cppdialect "C++23"
-    targetdir "build/%{cfg.buildcfg}"
+    targetdir "build/%{cfg.buildcfg}/%{cfg.architecture}"
+    objdir "build/%{cfg.buildcfg}/%{cfg.architecture}/obj"
+
+    includedirs {"include"}
 
     files {
-        "include/**.hpp"
+        "include/**.hpp",
         "src/**.cpp"
     }
 
