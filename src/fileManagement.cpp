@@ -18,9 +18,10 @@ void FileManagement::copyFile(std::string &sourcePath)
     std::string fileName = std::filesystem::path(sourcePath).filename().string();
     std::string fileFolderName = std::filesystem::path(sourcePath).stem().string();
 
-    std::filesystem::path appFolder = std::filesystem::path(defaultFolder) / fileFolderName;
+    std::filesystem::path appFolder = defaultFolder + "/" + fileFolderName;
 
     createFolder(appFolder);
+
     std::filesystem::path destinationPath = appFolder / fileName;
 
     try
