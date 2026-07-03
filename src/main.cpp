@@ -3,12 +3,13 @@
 
 int main(int argc, char *argv[])
 {
-    std::cout << "Hello, sir!" << std::endl;
+    std::cout << "Hello, sir!\n " << std::endl;
 
     FileManagement fm;
 
     if (!std::filesystem::exists(fm.filePath))
     {
+        std::cout << "Default folder not detected. Creating a new one: " << std::endl;
         fm.createFolder(fm.filePath);
     }
 

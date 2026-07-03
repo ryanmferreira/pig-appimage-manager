@@ -18,7 +18,7 @@ void FileManagement::copyFile(std::string &sourcePath)
     std::string fileName = std::filesystem::path(sourcePath).filename().string();
     std::string fileFolderName = std::filesystem::path(sourcePath).stem().string();
 
-    std::filesystem::path appFolder = defaultFolder + "/" + fileFolderName;
+    std::filesystem::path appFolder = defaultFolder + fileFolderName;
 
     createFolder(appFolder);
 
