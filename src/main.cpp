@@ -1,26 +1,41 @@
+#include <cctype>
 #include <iostream>
+
+#include "main.hpp"
+#include "utils.hpp"
 #include "fileManagement.hpp"
+#include "arguments.hpp"
+
+extern FileManagement fm;
+
+void checkDefaultFolder()
+{
+    if (!fs::exists(fm.folderPath))
+    {
+        std::cout << "> Default folder not detected. Creating a new one: " << std::endl;
+        fm.createFolder(fm.folderPath);
+    }
+}
 
 int main(int argc, char *argv[])
 {
-    std::cout << "Hello, sir!\n " << std::endl;
+    consoleClear();
 
-    FileManagement fm;
+    std::cout << greetings() << std::endl;
 
-    if (!std::filesystem::exists(fm.folderPath))
-    {
-        std::cout << "Default folder not detected. Creating a new one: " << std::endl;
-        fm.createFolder(fm.folderPath);
-    }
+    checkDefaultFolder();
 
-    if (argc > 2)
-    {
-        if (std::string(argv[1]) == "copy")
-        {
-            std::filesystem::path sourcePath = argv[2];
-            fm.copyFile(sourcePath);
-        }
-    }
+    validateArguments(argc, argv);
 
     return 0;
+}
+
+std::string greetings()
+{
+    std::string user = fm.user;
+
+    user[0] = std::toupper(user[0]);
+    std::string name = user;
+
+    return "> Hello, " + name + "!";
 }

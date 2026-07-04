@@ -1,40 +1,42 @@
-#include "fileManagement.hpp"
 #include <iostream>
 
-void FileManagement::createFolder(std::filesystem::path &filePath)
+#include "fileManagement.hpp"
+
+void FileManagement::createFolder(fs::path &filePath)
 {
-    if (std::filesystem::create_directories(filePath))
+    if (fs::create_directories(filePath))
     {
-        std::cout << "\nFolders created successfully!\nPath: " << filePath << std::endl;
+        std::cout << "\n> Folders created successfully!\nPath: " << filePath << std::endl;
     }
     else
     {
-        std::cout << "\nFolder failed to create or already exists.\n " << std::endl;
+        std::cout << "\n> Folder already exists or failed to create.\n " << std::endl;
     }
 }
 
-void FileManagement::copyFile(std::filesystem::path &sourcePath)
+void FileManagement::copyFile(fs::path &sourcePath)
 {
-    std::filesystem::path fileFolderName = sourcePath.stem();
-    std::filesystem::path fileName = sourcePath.filename();
+    fs::path fileFolderName = sourcePath.stem();
+    fs::path fileName = sourcePath.filename();
 
-    std::filesystem::path appFolder = saveLocation / fileFolderName;
+    fs::path appFolder = saveLocation / fileFolderName;
 
     createFolder(appFolder);
 
-    std::filesystem::path destinationPath = appFolder / fileName;
+    fs::path destinationPath = appFolder / fileName;
 
     try
     {
-        bool success = std::filesystem::copy_file(sourcePath, destinationPath);
+        bool success = fs::copy_file(sourcePath, destinationPath);
 
         if (success)
         {
-            std::cout << "\nFile copied successfully!\nPath: " << destinationPath << std::endl;
+            std::cout << "\n> File copied successfully!\nPath: " << destinationPath << std::endl;
         }
     }
-    catch (const std::filesystem::filesystem_error &error)
+    catch (const fs::filesystem_error &error)
     {
-        std::cerr << "Error: " << error.what() << '\n';
+        std::cerr << "Error copying file: file " << sourcePath.filename()
+                  << " probably already exists in " << saveLocation << std::endl;
     }
 }

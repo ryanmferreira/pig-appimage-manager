@@ -32,14 +32,16 @@ Applications and their metadata are managed within:
     ninja
     ```
 
-The compiled binary will be located at `build/Debug/x86_64/PIG` (or `Release` depending on your build configuration).
+> Or simply run the provided `scripts/setup.sh` script to perform both steps automatically.
+
+The compiled binary will be located at `build/Debug/x86_64/pig` (or `Release` depending on your build configuration).
 
 ## Usage
 
 To import an AppImage file into the manager:
 
 ```bash
-./PIG copy /path/to/application.AppImage
+./pig copy /path/to/application.AppImage
 ```
 
 ### File Structure
@@ -66,7 +68,7 @@ To import an AppImage file into the manager:
 
 #### Phase 1: Core & Ingestion (CLI)
 
-* [ ] **Path Resolution:** Accept a custom storage path or fallback to a default directory (e.g., `~/Apps/`). Expand `~` to the absolute path of `$HOME`.
+* [x] **Path Resolution:** Accept a custom storage path or fallback to a default directory (e.g., `~/Programs/AppImages/`).
 * [x] **Directory Isolation:** Create a dedicated subdirectory for each application to prevent data fragmentation.
 * [x] **Ingestion:** Move or copy the target `.AppImage` into its specific subdirectory.
 * [ ] **Permissions:** Apply executable permissions (`chmod +x`) programmatically to the binary.

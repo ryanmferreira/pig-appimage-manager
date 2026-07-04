@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
+echo -e "Copying file:\n"
 build/Debug/x86_64/pig copy /home/ryanf/Programs/AppImage/duckstation/DuckStation-x64.appimage

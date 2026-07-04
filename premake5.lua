@@ -9,6 +9,8 @@ workspace "pig-appimage-manager"
     targetdir "build/%{cfg.buildcfg}/%{cfg.architecture}"
     objdir "build/%{cfg.buildcfg}/%{cfg.architecture}/obj"
 
+    toolset "clang"
+
     includedirs {"include"}
 
     files {
