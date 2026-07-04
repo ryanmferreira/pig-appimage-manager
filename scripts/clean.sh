@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 
-echo -e "Cleaning build artifacts...\n"
-rm -rf build/
-rm -rf *ninja* .*ninja*
+source "$(dirname "$0")/common.sh"
 
-echo -e "Cleaning test application directory...\n"
-rm -rf /home/ryanf/Programs/AppImages/
+info "Cleaning build artifacts..."
+
+for file in build build.ninja .ninja_log .ninja_deps; do
+    rm -rf -- "$file"
+done
+
+info "Cleaning test application directory..."
+rm -rf -- "$HOME/Programs/AppImages"

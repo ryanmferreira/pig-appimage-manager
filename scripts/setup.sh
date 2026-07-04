@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 
-set -e
+source "$(dirname "$0")/common.sh"
 
-echo "Generating build files with Premake...\n"
+cd_project
+
+for command in premake5 ninja; do
+    command -v "$command" >/dev/null || die "$command not found"
+done
+
+info "Generating build files..."
 premake5 ninja
 
-echo -e "Running ninja...\n"
+info "Running ninja..."
 ninja

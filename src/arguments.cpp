@@ -4,7 +4,7 @@
 #include "fileManagement.hpp"
 #include "arguments.hpp"
 
-FileManagement fm;
+extern FileManagement fm;
 
 void handleHelp()
 {

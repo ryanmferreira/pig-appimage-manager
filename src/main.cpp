@@ -1,12 +1,12 @@
-#include <cctype>
 #include <iostream>
+#include <cctype>
 
 #include "main.hpp"
 #include "utils.hpp"
 #include "fileManagement.hpp"
 #include "arguments.hpp"
 
-extern FileManagement fm;
+FileManagement fm;
 
 void checkDefaultFolder()
 {

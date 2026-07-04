@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 
-echo -e "Removing folder /home/ryanf/Programs/AppImages/...\n"
-rm -rf /home/ryanf/Programs/AppImages/
+source "$(dirname "$0")/common.sh"
 
-echo -e "Running ninja...\n"
+cd_project
+
+APP_DIR="$HOME/Programs/AppImages"
+
+info "Removing $APP_DIR..."
+rm -rf -- "$APP_DIR"
+
+info "Building..."
 ninja

@@ -36,7 +36,7 @@ void FileManagement::copyFile(fs::path &sourcePath)
     }
     catch (const fs::filesystem_error &error)
     {
-        std::cerr << "Error copying file: file " << sourcePath.filename()
+        std::cerr << "Error copying file: file " << fileName
                   << " probably already exists in " << saveLocation << std::endl;
     }
 }
