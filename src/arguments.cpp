@@ -8,7 +8,7 @@ extern FileManagement fm;
 
 void handleHelp()
 {
-    std::cout << "> Available commands:\n"
+    std::cout << "\n> Available commands:\n"
               << "  --help        - Display this help message\n"
               << "  copy <source> - Copy a file to the default folder\n"
               << std::endl;
@@ -18,7 +18,7 @@ void handleCopy(int argc, char *argv[])
 {
     if (argc < 3)
     {
-        std::cout << "> Error: 'copy' requires a source file path.\nUsage: pig copy <source_path>" << std::endl;
+        std::cout << "\n> Error: 'copy' requires a source file path.\nUsage: pig copy <source_path>" << std::endl;
         return;
     }
 
@@ -30,7 +30,7 @@ void validateArguments(int argc, char *argv[])
 {
     if (argc < 2)
     {
-        std::cout << "> No command provided. Use 'help' to see available commands." << std::endl;
+        std::cout << "\n> No command provided. Use 'help' to see available commands." << std::endl;
         return;
     }
 
@@ -42,10 +42,11 @@ void validateArguments(int argc, char *argv[])
     }
     else if (command == "copy")
     {
+        std::cout << "\n> Adding file to apps folder..." << std::endl;
         handleCopy(argc, argv);
     }
     else
     {
-        std::cout << "> Invalid command. Use 'help' to see usage." << std::endl;
+        std::cout << "\n> Invalid command. Use 'help' to see usage." << std::endl;
     }
 }

@@ -16,5 +16,6 @@ public:
 
     void createFolder(fs::path &filePath);
     void copyFile(fs::path &sourcePath);
-    void giveExecPermissions(fs::path &sourcePath);
+    void giveExecPermissions(fs::path &filePath);
+    void openFile(fs::path &filePath);
 };
