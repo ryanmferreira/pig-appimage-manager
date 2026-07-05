@@ -32,11 +32,25 @@ void FileManagement::copyFile(fs::path &sourcePath)
         if (success)
         {
             std::cout << "\n> File copied successfully!\nPath: " << destinationPath << std::endl;
+            giveExecPermissions(destinationPath);
         }
     }
     catch (const fs::filesystem_error &error)
     {
         std::cerr << "Error copying file: file " << fileName
                   << " probably already exists in " << saveLocation << std::endl;
+    }
+}
+
+void FileManagement::giveExecPermissions(fs::path &sourcePath)
+{
+    try
+    {
+        fs::permissions(sourcePath, fs::perms::owner_exec, fs::perm_options::add);
+        std::cout << "\n> Execution permission for the file " << sourcePath << " added successfully!" << std::endl;
+    }
+    catch (const fs::filesystem_error &error)
+    {
+        std::cerr << "\n> Error: " << error.what() << std::endl;
     }
 }
