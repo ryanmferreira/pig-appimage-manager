@@ -19,8 +19,6 @@ void checkDefaultFolder()
 
 int main(int argc, char *argv[])
 {
-    consoleClear();
-
     std::cout << greetings() << std::endl;
 
     checkDefaultFolder();

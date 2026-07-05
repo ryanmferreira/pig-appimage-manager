@@ -9,54 +9,42 @@ extern FileManagement fm;
 void handleHelp()
 {
     std::cout << "\n> Available commands:\n"
-              << " --help        - Display this help message\n"
+              << " help          - Display this help message\n"
               << " copy <source> - Copy a file to the default folder\n"
               << " open <file>   - Open a file\n"
               << " home <file>   - Create a .home folder for the specified app\n"
               << std::endl;
 }
 
-void handleCopy(int argc, char *argv[])
+void handleInvalidCommand()
 {
-    if (argc < 3)
-    {
-        std::cout << "\n> Error: 'copy' requires a source file path.\nUsage: pig copy <source_path>" << std::endl;
-        return;
-    }
-
-    fs::path sourcePath = argv[2];
-    fm.copyFile(sourcePath);
-}
-
-void handleExecute(int argc, char *argv[])
-{
-    if (argc < 3)
-    {
-        std::cout << "\n> Error: 'execute' requires a file path.\nUsage: pig execute <file_path>" << std::endl;
-        return;
-    }
-
-    fs::path filePath = argv[2];
-    fm.openFile(filePath);
-}
-
-void handleCreateHomeFolder(int argc, char *argv[])
-{
-    if (argc < 3)
-    {
-        std::cout << "\n> Error: 'home' requires a file path.\nUsage: pig home <file_path>" << std::endl;
-        return;
-    }
-
-    fs::path filePath = argv[2];
-    fm.createAppHomeFolder(filePath);
+    std::cout << "\n> You typed an invalid command." << std::endl;
 }
 
 void validateArguments(int argc, char *argv[])
 {
+    std::string validCommands[] = {"copy", "open", "home", "help", "--help", "-h"};
+    bool isValidCommand = false;
+
+    for (const auto &cmd : validCommands)
+    {
+        if (cmd == argv[1])
+        {
+            isValidCommand = true;
+            break;
+        }
+    }
+
     if (argc < 2)
     {
         std::cout << "\n> No command provided. Use 'help' to see available commands." << std::endl;
+        return;
+    }
+
+    if (!isValidCommand)
+    {
+        handleInvalidCommand();
+        handleHelp();
         return;
     }
 
@@ -65,24 +53,28 @@ void validateArguments(int argc, char *argv[])
     if (command == "help" || command == "--help" || command == "-h")
     {
         handleHelp();
+        return;
     }
-    else if (command == "copy")
+
+    if (argc < 3)
+    {
+        std::cout << "\n> Error: '" << command << "' requires a file path.\n " << "Usage: pig " << command << " <path>" << std::endl;
+        return;
+    }
+
+    fs::path targetPath = argv[2];
+
+    if (command == "copy")
     {
         std::cout << "\n> Adding file to apps folder..." << std::endl;
-        handleCopy(argc, argv);
+        fm.copyFile(targetPath);
     }
     else if (command == "open")
     {
-        std::cout << "\n> Executing file..." << std::endl;
-        handleExecute(argc, argv);
+        fm.openFile(targetPath);
     }
     else if (command == "home")
     {
-        std::cout << "\n> Creating home folder..." << std::endl;
-        handleCreateHomeFolder(argc, argv);
-    }
-    else
-    {
-        std::cout << "\n> Invalid command. Use 'help' to see usage." << std::endl;
+        fm.createAppHomeFolder(targetPath);
     }
 }

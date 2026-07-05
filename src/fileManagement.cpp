@@ -6,7 +6,7 @@ void FileManagement::createFolder(fs::path &filePath)
 {
     if (fs::create_directories(filePath))
     {
-        std::cout << "\n> Folders created successfully!\nPath: " << filePath << std::endl;
+        std::cout << "\n> Folder " << filePath << " created successfully!" << std::endl;
     }
     else
     {
@@ -31,14 +31,13 @@ void FileManagement::copyFile(fs::path &sourcePath)
 
         if (success)
         {
-            std::cout << "\n> File copied successfully!\nPath: " << destinationPath << std::endl;
+            std::cout << "\n> Successfuly copied file " << destinationPath.filename() << " to " << destinationPath << std::endl;
             giveExecPermissions(destinationPath);
         }
     }
     catch (const fs::filesystem_error &error)
     {
-        std::cerr << "Error copying file: file " << fileName
-                  << " probably already exists in " << saveLocation << std::endl;
+        std::cerr << "Error copying file: maybe the file " << fileName << " already exists in " << saveLocation << std::endl;
     }
 }
 
@@ -47,7 +46,7 @@ void FileManagement::giveExecPermissions(fs::path &filePath)
     try
     {
         fs::permissions(filePath, fs::perms::owner_exec, fs::perm_options::add);
-        std::cout << "\n> Execution permission for the file " << filePath << " added successfully!" << std::endl;
+        std::cout << "\n> Added execution permission for the file " << filePath.filename() << std::endl;
     }
     catch (const fs::filesystem_error &error)
     {
@@ -57,13 +56,13 @@ void FileManagement::giveExecPermissions(fs::path &filePath)
 
 void FileManagement::openFile(fs::path &filePath)
 {
-    std::cout << "\n> Attempting to open file!\nPath: " << filePath << std::endl;
+    std::cout << "\n> Attempting to open file " << filePath.filename() << "!" << std::endl;
 
     bool success = std::system(filePath.c_str());
 
     if (success)
     {
-        std::cout << "\n> File executed successfully!\nPath: " << filePath << std::endl;
+        std::cout << "\n> File " << filePath.filename() << " executed successfully!" << std::endl;
     }
     else
     {
