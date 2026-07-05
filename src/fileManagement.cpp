@@ -33,7 +33,6 @@ void FileManagement::copyFile(fs::path &sourcePath)
         {
             std::cout << "\n> File copied successfully!\nPath: " << destinationPath << std::endl;
             giveExecPermissions(destinationPath);
-            openFile(destinationPath);
         }
     }
     catch (const fs::filesystem_error &error)
@@ -70,4 +69,12 @@ void FileManagement::openFile(fs::path &filePath)
     {
         std::cerr << "\n> Error: Failed to open the file " << filePath << std::endl;
     }
+}
+
+void FileManagement::createAppHomeFolder(fs::path &filePath)
+{
+    std::cout << "\n> Creating .home folder for " << filePath.filename() << std::endl;
+
+    fs::path appHomeFolder = filePath.string() + ".home";
+    createFolder(appHomeFolder);
 }

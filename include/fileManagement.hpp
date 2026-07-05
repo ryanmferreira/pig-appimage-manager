@@ -15,6 +15,7 @@ public:
     fs::path folderPath = saveLocation;
 
     void createFolder(fs::path &filePath);
+    void createAppHomeFolder(fs::path &filePath);
     void copyFile(fs::path &sourcePath);
     void giveExecPermissions(fs::path &filePath);
     void openFile(fs::path &filePath);
