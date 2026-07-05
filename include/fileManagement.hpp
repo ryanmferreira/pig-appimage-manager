@@ -1,5 +1,4 @@
 #pragma once
-#include <filesystem>
 
 namespace fs = std::filesystem;
 
@@ -19,4 +18,5 @@ public:
     void copyFile(fs::path &sourcePath);
     void giveExecPermissions(fs::path &filePath);
     void openFile(fs::path &filePath);
+    void deleteFile(fs::path &filePath);
 };

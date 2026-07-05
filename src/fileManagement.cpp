@@ -1,4 +1,5 @@
 #include <iostream>
+#include <filesystem>
 
 #include "fileManagement.hpp"
 
@@ -76,4 +77,18 @@ void FileManagement::createAppHomeFolder(fs::path &filePath)
 
     fs::path appHomeFolder = filePath.string() + ".home";
     createFolder(appHomeFolder);
+}
+
+void FileManagement::deleteFile(fs::path &filePath)
+{
+    bool success = fs::exists(filePath) && fs::is_regular_file(filePath);
+
+    if (success)
+    {
+        fs::remove(filePath);
+    }
+    else
+    {
+        std::cerr << "\n> Error: File " << filePath << " does not exist or is not a regular file." << std::endl;
+    }
 }

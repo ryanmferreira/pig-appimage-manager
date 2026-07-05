@@ -1,8 +1,11 @@
 #include <iostream>
+#include <filesystem>
+#include <vector>
 
+#include "arguments.hpp"
 #include "main.hpp"
 #include "fileManagement.hpp"
-#include "arguments.hpp"
+#include "scanApps.hpp"
 
 extern FileManagement fm;
 
@@ -23,7 +26,7 @@ void handleInvalidCommand()
 
 void validateArguments(int argc, char *argv[])
 {
-    std::string validCommands[] = {"copy", "open", "home", "help", "--help", "-h"};
+    std::string validCommands[] = {"copy", "open", "home", "delete", "show", "help", "--help", "-h"};
     bool isValidCommand = false;
 
     for (const auto &cmd : validCommands)
@@ -55,6 +58,11 @@ void validateArguments(int argc, char *argv[])
         handleHelp();
         return;
     }
+    else if (command == "show")
+    {
+        loadInstalledApps();
+        return;
+    }
 
     if (argc < 3)
     {
@@ -72,6 +80,10 @@ void validateArguments(int argc, char *argv[])
     else if (command == "open")
     {
         fm.openFile(targetPath);
+    }
+    else if (command == "delete")
+    {
+        fm.deleteFile(targetPath);
     }
     else if (command == "home")
     {
